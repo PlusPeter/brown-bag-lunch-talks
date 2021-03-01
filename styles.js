@@ -3,7 +3,8 @@ import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
 export const PaddedParagraph = styled.p`
-  padding: 1rem;
+  margin: 0;
+  padding: 0 1rem;
 `
 
 export const Code = styled.div`
@@ -28,4 +29,18 @@ export const Code = styled.div`
   blockquote {
     white-space: pre-wrap;
   }
+`
+
+export const Definitions = styled.dl`
+  padding: 0 1rem;
+  text-align: left;
+`
+
+export const Term = styled.dt`
+  font-weight: strong;
+`
+
+export const Def = styled.dd`
+  padding-left: 1rem;
+  font-size: 0.8em;
 `
