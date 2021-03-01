@@ -61,6 +61,16 @@ In a React-rendered page, one of the chief differences is that React uses a Virt
 
 # One-way (Unidirectional) Binding
 <PP>
-If you've worked with other JavaScript frameworks, you may be familiar with two-way binding &mdash; a circular hell where property and event binding is used to pass data from parent to child <em>and</em> child to parent.
+If you've worked with other JavaScript frameworks, you may be familiar with two-way binding &mdash; a circular hell where property and event binding is used to pass data from parent to child and vice-versa. This means that there are multiple sources of truth.
 </PP>
+<PP>
+React does not allow for child-to-parent data transfer; instead it enforces a uni-directional "one source of truth" approach where the model updates the UI exclusively. When changes are needed, child components can pass events. This then tells the efficient Virtual DOM reconciliation to re-render only the parts of the application which have changed. In this way, React elements are immutable.
+</PP>
+<PP>
+This process allows for much more straightforward debugging and reasoning about the application.
+</PP>
+
+---
+
+# Hydration
 
