@@ -1,5 +1,5 @@
 import Flava from './images/flava.png'
-import {Code, PaddedParagraph as PP} from './styles'
+import {Definitions, Def, Term, Code, PaddedParagraph as PP} from './styles'
 
 ## React
 ##### What is it and how does it work?
@@ -13,9 +13,10 @@ A presentation by Ramses ✨ & Brekk 🍛
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png)
 
-<PP>
-React is a framework created by Facebook which is designed to make declarative and efficient data-driven UIs.
-</PP>
+<Definitions>
+<Term>React</Term>
+<Def>a framework created by Facebook which is designed to make declarative and efficient data-driven (unidirectional) UIs.</Def>
+</Definitions>
 
 
 </Split>
@@ -32,11 +33,12 @@ React is a framework created by Facebook which is designed to make declarative a
 
 ---
 # HTML
+
 <Code>
 
 ```
 <p>In a standard <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a> &amp; CSS page, you'd use HTML markup to organize / structure the page.</p>
-<p>On page load, HTML is parsed by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">Document Object Model</a> and rendered to the page.</p>
+<p>On page load, HTML is parsed by the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">Document Object Model</a> and it then represents the structure of the page in memory.</p>
 ```
 
 </Code>
@@ -44,9 +46,31 @@ React is a framework created by Facebook which is designed to make declarative a
 ---
 # React
 
-In a React-rendered page, one of the chief differences is that React uses a Virtual DOM which is much more efficient at managing the difference between the last render and the next render.
+1. Virtual DOM
+2. One-way binding
+3. Hydration
 
-This gives us faster successive renders.
+---
 
+# Virtual DOM
+<PP>
+In a React-rendered page, one of the chief differences is that React uses a Virtual DOM which is much more efficient at managing the difference between the last render and the next render. This abstraction allows us to declare the state of the application, and React manages the DOM to make sure it matches that state. Additionally, React's Virtual DOM has an underlying concept called "Fibers" (think memory-threads) which allow it to make more judicious updates of the application and render it more efficiently than raw HTML.
+</PP>
 
+---
+
+# One-way (Unidirectional) Binding
+<PP>
+If you've worked with other JavaScript frameworks, you may be familiar with two-way binding &mdash; a circular hell where property and event binding is used to pass data from parent to child and vice-versa. This means that there are multiple sources of truth.
+</PP>
+<PP>
+React does not allow for child-to-parent data transfer; instead it enforces a uni-directional "one source of truth" approach where the model updates the UI exclusively. When changes are needed, child components can pass events. This then tells the efficient Virtual DOM reconciliation to re-render only the parts of the application which have changed. In this way, React elements are immutable.
+</PP>
+<PP>
+This process allows for much more straightforward debugging and reasoning about the application.
+</PP>
+
+---
+
+# Hydration
 
