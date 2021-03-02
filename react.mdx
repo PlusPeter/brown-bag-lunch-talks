@@ -1,6 +1,18 @@
 import { LiveCode } from 'mdx-deck-live-code'
 import Flava from './images/flava.png'
-import {Definitions, Def, Term, Code, PaddedParagraph as PP} from './styles'
+import Questions from './images/questions.gif'
+import { Definitions, Def, Term, Code, PaddedParagraph as PP } from './styles'
+import { future } from '@mdx-deck/themes'
+
+export const theme = {...future}
+
+export const liveCodePreviewProps = {
+  style: {
+    textAlign: 'left',
+    padding: '0.5em',
+    color: 'black'
+  }
+}
 
 ## React
 ##### What is it and how does it work?
@@ -101,31 +113,65 @@ This process allows for much more straightforward debugging and reasoning about 
 
 ---
 
+<LiveCode
+  title="Why use JSX?"
+  code={`() => {
+    return (
+      <article>
+        <h1>Title</h1>
+        <small>Author</small>
+        <p>Summary</p>
+      </article>
+    )
+  }`} 
+  size="small"
+  previewProps={liveCodePreviewProps} 
+/>
+
+<Notes>
+React embraces the fact that rendering logic is inherently coupled with other UI logic: how events are handled, how the state changes over time, and how the data is prepared for display.
+</Notes>
+
+---
+
+<LiveCode
+  title="Component: Composition, Class vs Functional"
+  code={`() => {
+    return (<div />)
+  }`} 
+  previewProps={liveCodePreviewProps} 
+/>
+
+---
+
+<LiveCode
+  title="State and Props"
+  code={`() => {
+    return (<div />)
+  }`} 
+  previewProps={liveCodePreviewProps} 
+/>
+
+---
+
 ## Downsides / Cons of React
 
 * Conflation of concerns (HTML / CSS / JS) should be separate?
 * TIMTOWTDI - "there's more than one way to do it"
+* SEO
 * Different approaches within various eras of React
   - "Class" Components
   - State management
   - Stateless Functional Components
   - Hooks
 
+<Notes>
+SEO
+React requires Javascript to show the content on the page. The problem is that the Google crawl bot, that scans all the pages on the internet, 'isn’t as good as fast compiling a page with javascript compared with a page that consists of regular HTML-code'.
+</Notes>
+
 ---
 
-<LiveCode
-  title="Why use JSX?"
-  code={`<article>
-  <h1>Title</h1>
-  <small>Author</small>
-  <p>Summary</p>
-</article>`}
-  size="small"
-  previewProps={{
-    style: {
-      textAlign: 'left',
-      padding: '0.5em',
-      color: 'black'
-    }
-  }} 
-/>
+## Questions
+
+<img src={Questions} />
