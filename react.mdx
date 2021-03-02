@@ -1,3 +1,4 @@
+import { LiveCode } from 'mdx-deck-live-code'
 import Flava from './images/flava.png'
 import {Definitions, Def, Term, Code, PaddedParagraph as PP} from './styles'
 
@@ -27,12 +28,12 @@ A presentation by Ramses ✨ & Brekk 🍛
 
 <img src={Flava} />
 
-# What's with all the hype?
+## What's with all the hype?
 
 </SplitRight>
 
 ---
-# HTML
+## HTML
 
 <Code>
 
@@ -44,33 +45,87 @@ A presentation by Ramses ✨ & Brekk 🍛
 </Code>
 
 ---
-# React
+## React
+
+_What's good about it?_
 
 1. Virtual DOM
-2. One-way binding
-3. Hydration
+2. Unidirectional flow
+3. Server-Side Rendering
+4. JSX - optional but wonderful
+
+<Notes>
+Virtual DOM, it's like the DOM, but virtual
+Unidirectional flow
+JSX - the last templating language you should have to learn
+</Notes>
 
 ---
 
-# Virtual DOM
-<PP>
+## Virtual DOM
+
+* Reconciliation 👯‍♂️
+* Better than native 🤓
+* Fibers 🧶
+
+
+<Notes>
 In a React-rendered page, one of the chief differences is that React uses a Virtual DOM which is much more efficient at managing the difference between the last render and the next render. This abstraction allows us to declare the state of the application, and React manages the DOM to make sure it matches that state. Additionally, React's Virtual DOM has an underlying concept called "Fibers" (think memory-threads) which allow it to make more judicious updates of the application and render it more efficiently than raw HTML.
-</PP>
+</Notes>
 
 ---
 
-# One-way (Unidirectional) Binding
-<PP>
+## Unidirectional Data-Flow
+
+* A single source of truth 1️⃣
+* Elements are immutable once drawn 🚯
+* Events allow for signaling a re-render 📞
+* No circular hell like in Angular / Vue 👿
+* This lends itself to composition 🎼
+
+<Notes>
 If you've worked with other JavaScript frameworks, you may be familiar with two-way binding &mdash; a circular hell where property and event binding is used to pass data from parent to child and vice-versa. This means that there are multiple sources of truth.
-</PP>
-<PP>
 React does not allow for child-to-parent data transfer; instead it enforces a uni-directional "one source of truth" approach where the model updates the UI exclusively. When changes are needed, child components can pass events. This then tells the efficient Virtual DOM reconciliation to re-render only the parts of the application which have changed. In this way, React elements are immutable.
-</PP>
-<PP>
 This process allows for much more straightforward debugging and reasoning about the application.
-</PP>
+</Notes>
 
 ---
 
-# Hydration
+## Isomorphic & More
 
+* Rendering in the browser ✔
+* Rendering on the server ✔
+* Rendering on mobile devices (React Native) ✔
+* Views for CLI tools (Ink) ✔
+* Views for Compositing video (Remotion) ✔
+
+---
+
+## Downsides / Cons of React
+
+* Conflation of concerns (HTML / CSS / JS) should be separate?
+* TIMTOWTDI - "there's more than one way to do it"
+* Different approaches within various eras of React
+  - "Class" Components
+  - State management
+  - Stateless Functional Components
+  - Hooks
+
+---
+
+<LiveCode
+  title="Why use JSX?"
+  code={`<article>
+  <h1>Title</h1>
+  <small>Author</small>
+  <p>Summary</p>
+</article>`}
+  size="small"
+  previewProps={{
+    style: {
+      textAlign: 'left',
+      padding: '0.5em',
+      color: 'black'
+    }
+  }} 
+/>
