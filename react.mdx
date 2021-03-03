@@ -36,14 +36,19 @@ A presentation by Ramses ✨ & Brekk 🍛
 </Split>
 
 ---
+## React
 
-<SplitRight>
+_What's good about it?_
 
-<img src={Flava} />
+1. Virtual DOM
+2. Unidirectional flow
+4. JSX - optional but wonderful
 
-## What's with all the hype?
-
-</SplitRight>
+<Notes>
+Virtual DOM, it's like the DOM, but virtual
+Unidirectional flow
+JSX - the last templating language you should have to learn
+</Notes>
 
 ---
 ## HTML
@@ -56,22 +61,6 @@ A presentation by Ramses ✨ & Brekk 🍛
 ```
 
 </Code>
-
----
-## React
-
-_What's good about it?_
-
-1. Virtual DOM
-2. Unidirectional flow
-3. Server-Side Rendering
-4. JSX - optional but wonderful
-
-<Notes>
-Virtual DOM, it's like the DOM, but virtual
-Unidirectional flow
-JSX - the last templating language you should have to learn
-</Notes>
 
 ---
 
@@ -117,9 +106,10 @@ This process allows for much more straightforward debugging and reasoning about 
 <LiveCode
   title="Why use JSX?"
   code={`() => {
+    const name = <h1>Name</h1>
     return (
       <article>
-        <h1>Title</h1>
+        {name}
         <small>Author</small>
         <p>Summary</p>
       </article>
@@ -253,7 +243,7 @@ React embraces the fact that rendering logic is inherently coupled with other UI
 
 * Conflation of concerns (HTML / CSS / JS) should be separate?
 * TIMTOWTDI - "there's more than one way to do it"
-* SEO
+* SEO / Server-Side Rendering
 * Different approaches within various eras of React
   - "Class" Components
   - State management
