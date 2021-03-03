@@ -37,7 +37,8 @@ export const Definitions = styled.dl`
 `
 
 export const Term = styled.dt`
-  font-weight: strong;
+  font-weight: bold;
+  padding: 0 1rem;
 `
 
 export const Def = styled.dd`

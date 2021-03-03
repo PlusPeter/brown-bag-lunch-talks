@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { LiveCode } from 'mdx-deck-live-code'
 import Flava from './images/flava.png'
 import Questions from './images/questions.gif'
@@ -135,20 +136,114 @@ React embraces the fact that rendering logic is inherently coupled with other UI
 ---
 
 <LiveCode
-  title="Component: Composition, Class vs Functional"
-  code={`() => {
-    return (<div />)
-  }`} 
+  title="Components: Class vs Functional, Composition"
+  code={`
+  // ------ Functional ------
+  const Title = () => (
+    <h3 style={{ color: 'palevioletred' }}>
+      Hello World!
+    </h3>
+  );
+  // -------- Class ---------
+  class Likes extends React.Component {
+    render() {
+      return (
+        <>
+          <h3>0 💔</h3>
+          <button>Like me 🥺</button>
+        </>  
+      )
+    }
+  }
+  render(
+    <center>
+      <Title />
+      <Likes />
+    </center>
+  )
+  `} 
+  size="small"
+  providerProps={{ noInline: true }}
   previewProps={liveCodePreviewProps} 
 />
 
 ---
 
 <LiveCode
-  title="State and Props"
-  code={`() => {
-    return (<div />)
-  }`} 
+  title="Props and States"
+  code={`
+  // ------ Functional ------
+  const Title = (props) => (
+    <h3 style={{ color: 'palevioletred' }}>
+      {props.title}
+    </h3>
+  );
+  // -------- Class ---------
+  class Likes extends React.Component {
+    constructor() {
+      super()
+      this.state = { likes: 0 }
+      this.increaseSelfEsteem = this.increaseSelfEsteem.bind(this);
+    }
+    increaseSelfEsteem() {
+      this.setState(state => {
+        return { likes: state.likes + 1}
+      })
+    }
+    render() {
+      return (
+        <>
+          <h3>{this.state.likes} 🖤</h3>
+          <button onClick={this.increaseSelfEsteem}>
+            Like me 🥺
+          </button>
+        </>  
+      )
+    }
+  }
+  render(
+    <center>
+      <Title title="Hello World!" />
+      <Likes />
+    </center>
+  )
+  `} 
+  providerProps={{ noInline: true }}
+  previewProps={liveCodePreviewProps} 
+/>
+
+---
+
+<LiveCode
+  title="Hooks version"
+  code={`
+  // ------ Functional ------
+  const Title = (props) => (
+    <h3 style={{ color: 'palevioletred' }}>
+      {props.title}
+    </h3>
+  );
+  // ---- Functional with Hooks ----
+  const Likes = () => {
+    const [likes, setLikes] = useState(0)
+    const increaseSelfEsteem = () => setLikes(likes + 1)
+    return (
+      <>
+        <h3>{likes} 🖤</h3>
+        <button onClick={increaseSelfEsteem}>
+          Like me 🥺
+        </button>
+      </>  
+    )
+  }
+  render(
+    <center>
+      <Title title="Hello World!" />
+      <Likes />
+    </center>
+  )
+  `} 
+  providerProps={{ scope: {useState}, noInline: true }}
   previewProps={liveCodePreviewProps} 
 />
 
@@ -174,4 +269,4 @@ React requires Javascript to show the content on the page. The problem is that t
 
 ## Questions
 
-<img src={Questions} />
+<img style={{ height: '50%' }} src={Questions} />
