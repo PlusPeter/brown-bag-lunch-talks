@@ -71,16 +71,13 @@ export const ea = () => {
                 .map((a) => {
                     return a.genome
                 })
-            const ofs1 = offspring(survivors[0])
-            logs.push(`new offspring ${ofs1} from parent ${survivors[0]}`)
-            // const ofs2 = offspring(survivors[1])
-            // logs.push(`new offspring ${ofs2} from parent ${survivors[1]}`)
+            const ofs = offspring(survivors[0])
+            logs.push(`new offspring ${ofs} from parent ${survivors[0]}`)
             const mutation = species(1)
             logs.push("new mutation " + [...mutation][0])
 
             const nextSpecies = mutation
-            nextSpecies.add(ofs1)
-            // nextSpecies.add(ofs2)
+            nextSpecies.add(ofs)
             survivors.forEach(nextSpecies.add, nextSpecies)
             sp = nextSpecies
         }
