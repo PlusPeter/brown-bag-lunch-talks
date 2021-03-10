@@ -1,4 +1,3 @@
-import { LiveCode } from 'mdx-deck-live-code'
 import Flava from '../images/react/flava.png'
 import Questions from '../images/react/questions.gif'
 import Tsp from '../images/ea/tsp.png'
@@ -10,14 +9,6 @@ export const theme = {...future}
 
 export const sp = ea().species(4)
 export const fit = ea().fitness(sp)
-
-export const liveCodePreviewProps = {
-  style: {
-    textAlign: 'left',
-    padding: '0.5em',
-    color: 'black',
-  }
-}
 
 export const Log = ({value, fSize="1rem", decode=false}) => {
   const codeStr = (v, decode) => {
