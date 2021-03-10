@@ -1,0 +1,108 @@
+import { LiveCode } from 'mdx-deck-live-code'
+import Flava from '../images/react/flava.png'
+import Questions from '../images/react/questions.gif'
+import { PaddedParagraph as PP } from '../styles'
+import { future } from '@mdx-deck/themes'
+
+export const theme = {...future}
+
+export const liveCodePreviewProps = {
+  style: {
+    textAlign: 'left',
+    padding: '0.5em',
+    color: 'black'
+  }
+}
+
+## Evolutionary Algorithms
+
+<small>
+A presentation by Luis 🧞‍♂️ & Ramses 🧜‍♂️
+</small>
+
+---
+
+## Biological Evolution
+
+<small>
+Charles Darwin and Alfred Russel Wallace 🐒
+</small>
+
+<br />
+<br />
+
+<PP>
+Evolution is change in the heritable characteristics of biological populations over successive generations.
+</PP>
+
+<Notes>
+These characteristics are the expressions of genes that are passed on from parent to offspring during reproduction. Different characteristics tend to exist within any given population as a result of mutation, genetic recombination and other sources of genetic variation. Evolution occurs when evolutionary processes such as natural selection (including sexual selection) and genetic drift act on this variation, resulting in certain characteristics becoming more common or rare within a population.
+</Notes>
+
+---
+
+## Evolutionary computation
+
+<PP>
+In computer science, evolutionary computation is a family of algorithms for global optimization inspired by biological evolution, and the subfield of artificial intelligence and soft computing studying these algorithms.
+</PP>
+
+<Notes>
+In technical terms, they are a family of population-based trial and error problem solvers with a metaheuristic or stochastic optimization character.
+</Notes>
+
+---
+
+## Evolutionary algorithms
+
+<PP>
+In computational intelligence (CI), an evolutionary algorithm (EA) is a subset of evolutionary computation,a generic population-based metaheuristic optimization algorithm. An EA uses mechanisms inspired by <strong>biological evolution</strong>, such as <strong>reproduction, mutation, recombination, and selection</strong>
+</PP>
+
+<Notes>
+Candidate solutions to the optimization problem play the role of individuals in a population, and the fitness function determines the quality of the solutions. Evolution of the population then takes place after the repeated application of the above operators.
+</Notes>
+
+---
+
+## Implementation
+
+<PP>
+  <ul>
+    Step 1
+    <li>Generate the initial population of individuals randomly. (First generation)</li>
+  </ul>
+
+
+  <ul>
+    Step 2
+    <Steps>
+      <li>Evaluate the fitness of each individual in the population.</li>
+      <li>Select the fittest individuals for reproduction.</li>
+      <li>Breed new individuals through crossover and mutation operations to give birth to offspring.</li>
+      <li>Replace the least-fit individuals of the population with new individuals.</li>
+    </Steps>
+  </ul>
+</PP> 
+
+---
+
+<LiveCode
+  title="Demo"
+  code={`() => {
+    return (
+      <center>
+        hello!
+      </center>
+    )
+  }`}
+  previewProps={liveCodePreviewProps} 
+/>
+
+<Notes>Add notes here :)</Notes>
+
+---
+
+## Questions
+
+<img style={{ height: '50%' }} src={Questions} />
