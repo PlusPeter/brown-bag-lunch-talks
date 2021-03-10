@@ -1,10 +1,8 @@
-import React from 'react'
-import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
 export const PaddedParagraph = styled.p`
   margin: 0;
-  padding: 0 1rem;
+  padding: 0 6rem;
 `
 
 export const Code = styled.div`
