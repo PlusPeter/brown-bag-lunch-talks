@@ -1,18 +1,45 @@
 import { LiveCode } from 'mdx-deck-live-code'
 import Flava from '../images/react/flava.png'
 import Questions from '../images/react/questions.gif'
+import Tsp from '../images/ea/tsp.png'
 import { PaddedParagraph as PP } from '../styles'
 import { future } from '@mdx-deck/themes'
+import { ea } from "./ea.js"
 
 export const theme = {...future}
+
+export const sp = ea().species(4)
+export const fit = ea().fitness(sp)
 
 export const liveCodePreviewProps = {
   style: {
     textAlign: 'left',
     padding: '0.5em',
-    color: 'black'
+    color: 'black',
   }
 }
+
+export const Log = ({value, fSize="1rem", decode=false}) => {
+  const codeStr = (v, decode) => {
+    if (!decode) {
+      return v
+    }
+    const newline = String.fromCharCode(13, 10);
+    let json = JSON.stringify(value, null, 2)
+    json = json.replaceAll(/\\n/g, newline)
+    return json
+  }
+  return (
+    <pre style={{
+      fontSize: fSize,
+      maxHeight: '50%',
+      minHeight: '75px',
+      overflow: 'scroll',
+      padding: '1em'
+    }}>
+      {codeStr(value, decode)}
+    </pre>
+)}
 
 ## Evolutionary Algorithms
 
@@ -87,19 +114,194 @@ Candidate solutions to the optimization problem play the role of individuals in 
 
 ---
 
-<LiveCode
-  title="Demo"
-  code={`() => {
-    return (
-      <center>
-        hello!
-      </center>
-    )
-  }`}
-  previewProps={liveCodePreviewProps} 
-/>
+## Traveling Salesman problem
 
-<Notes>Add notes here :)</Notes>
+<PP>
+Given a list of cities and the distances between each pair of cities, what is the shortest possible route that visits each city exactly once and returns to the origin city?"
+</PP>
+<br />
+<img style={{ height: '30%' }} src={Tsp} />
+
+---
+
+## Implementation
+
+A matrix to represent a simlar graph can be represented as:
+<Log value={`
+const dists = {
+    "a": [ 0, 10, 15, 20, 30 ],
+    "b": [ 10, 0, 35, 25, 20 ],
+    "c": [ 15, 35, 0, 30, 25 ],
+    "d": [ 20, 25, 30, 0, 30 ],
+    "e": [ 30, 20, 25, 30, 0 ],
+}
+`} />
+
+One path can be:
+<Log value={`
+const path = ["a", "b", "c", "d", "e"]
+`} />
+
+---
+
+## Implementation
+
+In order to calculate a distance we have:
+<Log value={`
+const calcDist = (path) => {
+  return path.map((p, i) => {
+      let next = 0
+      if (i < path.length-2) {
+          next = i+1
+      }
+      return dists[p][next]
+  }).reduce((p, n) => {
+      return p + n
+  })
+}
+`} />
+
+The total distance for:
+<Log value={`
+calcDist(["a", "b", "c", "d", "e"])
+`} />
+<Log value={ea().calcDist(["a", "b", "c", "d", "e"])} />
+
+---
+
+## Implementation
+
+Using other permutations:
+<Log value={`
+calcDist(["a", "c", "b", "d", "e"])
+`} />
+<PP>Distance:</PP>
+<Log value={ea().calcDist(["a", "c", "b", "d", "e"])} />
+<Log value={`
+calcDist(["a", "e", "c", "b", "d"])
+`} />
+<PP>Distance:</PP>
+<Log value={ea().calcDist(["a", "e", "c", "b", "d"])} />
+
+
+---
+
+## Implementation
+
+Let's create some species:
+<Log value={`
+const genome = (list) => {
+    list.sort(() => Math.random() - 0.5)
+    return [...list]
+}
+` + `
+const species = (size) => {
+    const sp = new Set()
+    while (sp.size < size) {
+        const g = genome(cities)
+        sp.add(g.join(''))
+    }
+    return sp
+}
+`} />
+
+
+Create 4 random species:
+<Log value={"species(4)"} />
+
+Each line is a genome that define a species:
+<Log value={[...sp]} decode={true} />
+
+<Notes>
+  The species should be randomly generated with an equal distribution, 
+  for this example is just a simple random
+</Notes>
+
+---
+
+## Implementation
+
+Calculate their fitness:
+<Log value={`
+const fitness = (sp) => {
+    return [...sp].map((s) => {
+        return { "genome": s, "distance": calcDist(s.split('')) }
+    }).sort((a, b) => {
+        return a.distance - b.distance
+    })
+}
+`} />
+<small>Less distance better fitness</small>
+<Log value={fit} decode={true} />
+
+---
+
+## Implementation
+
+Breed from most fitted by swapping one part of the path
+<Log value={`
+const offspring = (parent) => {
+    const a = parent.split('')
+    const max = a.length
+    const x = Math.floor(Math.random() * Math.floor(max))
+    const y = x+1 <= max ? x+1 : 0
+    a[x] = a.splice(y,1, a[x])[0]
+    const ofs = a.join("")
+    return ofs
+}
+`} />
+
+Parent:
+<Log value={fit[0]} decode={true} />
+
+Offspring:
+<Log value={ea().offspring(fit[0].genome)} decode={true} />
+
+
+<Notes>
+  The fitness criteria and breeding are the 2 most important parts 
+  of a genetic algorithm
+</Notes>
+
+
+---
+
+## Implementation
+
+Now we run the process for generations
+<Log value={`
+const generations = (size, spTotal, survRate) => {
+    let sp = species(spTotal)
+    for (let i=0; i<size; i++) {
+        const generation = fitness(sp)
+        const survivors = generation.slice(0, survRate)
+            .map((a) => {
+                return a.genome
+            })
+        const ofs = offspring(survivors[0])
+        const mutation = species(1)
+        const nextSpecies = mutation
+        nextSpecies.add(ofs)
+        nextSpecies.add(ofs)
+        survivors.forEach(nextSpecies.add, nextSpecies)
+        sp = nextSpecies
+    }
+    return sp
+}
+`} />
+
+
+---
+
+## Implementation
+
+
+<Log value={`
+generations(10,4,2)
+`} />
+
+10 generations, 4 initial species, 2 survivors per generation
+<Log value={ea().generations(10,4,2)} decode={true} fSize="0.4em" />
 
 ---
 
