@@ -14,8 +14,11 @@
   "dependencies": {
     "@emotion/react": "^11.1.5",
     "@mdx-deck/themes": "^4.1.0",
+    "@react-three/drei": "^4.0.3",
+    "@react-three/fiber": "^6.0.8",
     "mdx-deck": "4.0.0",
     "mdx-deck-live-code": "^1.0.1",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "three": "^0.127.0"
   }
 }

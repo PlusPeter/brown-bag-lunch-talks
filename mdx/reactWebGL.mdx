@@ -1,0 +1,212 @@
+import { useState, useRef } from 'react'
+import { LiveCode } from 'mdx-deck-live-code'
+import Questions from '../images/react/questions.gif'
+import { PaddedParagraph as PP } from '../styles'
+import { future } from '@mdx-deck/themes'
+import { Canvas, useFrame } from '@react-three/fiber' 
+import { Box } from '@react-three/drei'
+
+export const theme = {...future}
+
+export const liveCodePreviewProps = {
+  style: {
+    textAlign: 'left',
+    padding: '0.5em',
+    color: 'black'
+  }
+}
+
+## React & WebGL 
+
+<small>
+A presentation by Ramses 🕹️
+</small>
+
+
+---
+
+## WebGL
+<small>
+Web Graphics Library 👊 🎮
+</small>
+
+<br />
+<br />
+
+<PP>
+WebGL is a JavaScript API for rendering interactive 2D and 3D graphics within any compatible web browser without the use of plug-ins.
+</PP>
+
+---
+
+## react-three-fiber
+<br />
+
+<PP>
+Build your scene declaratively with re-usable, self-contained components that react to state, are readily interactive and can tap into React's ecosystem.
+</PP>
+
+---
+
+## react-three-fiber
+<br />
+
+<PP>
+Build your scene declaratively with re-usable, self-contained components that react to state, are readily interactive and can tap into React's ecosystem.
+</PP>
+
+---
+
+<LiveCode
+  title="Getting started"
+  code={`
+  const Box = (props) => {
+    return (
+      <mesh {...props}>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color="orange" />
+      </mesh>
+    )
+  }
+  render(
+    <Canvas camera={{ position: [0, 0, -5] }}>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+      <Box position={[0, 0, 0]} />
+    </Canvas>
+  )
+  `} 
+  providerProps={{ scope: { useState, Canvas, useRef, useFrame }, noInline: true }}
+  previewProps={liveCodePreviewProps} 
+/>
+
+---
+
+<LiveCode
+  title="Adding click interaction"
+  code={`
+  const Box = (props) => {
+    const [active, setActive] = useState(false)
+    return (
+      <mesh
+        {...props}
+        scale={active ? 1.5 : 1}
+        onClick={() => setActive(!active)}
+       >
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color="orange" />
+      </mesh>
+    )
+  }
+  render(
+    <Canvas camera={{ position: [0, 0, -5] }}>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+      <Box position={[0, 0, 0]} />
+    </Canvas>
+  )
+  `} 
+  providerProps={{ scope: { useState, Canvas, useRef, useFrame }, noInline: true }}
+  previewProps={liveCodePreviewProps} 
+/>
+
+---
+
+<LiveCode
+  title="Adding Hover interaction"
+  code={`
+  const Box = (props) => {
+    const [hovered, setHover] = useState(false)
+    const [active, setActive] = useState(false)
+    return (
+      <mesh
+        {...props}
+        scale={active ? 1.5 : 1}
+        onClick={() => setActive(!active)}
+        onPointerOver={() => setHover(true)}
+        onPointerOut={() => setHover(false)}
+      >
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      </mesh>
+    )
+  }
+  render(
+    <Canvas camera={{ position: [0, 0, -5] }}>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+      <Box position={[0, 0, 0]} />
+    </Canvas>
+  )
+  `} 
+  providerProps={{ scope: { useState, Canvas, useRef, useFrame }, noInline: true }}
+  previewProps={liveCodePreviewProps} 
+/>
+
+---
+
+<LiveCode
+  title="Animating"
+  code={`
+  const Box = (props) => {
+    // This reference will give us direct access to the mesh
+    const mesh = useRef()
+    // Set up state for the hovered and active state
+    const [hovered, setHover] = useState(false)
+    const [active, setActive] = useState(false)
+    // Rotate mesh every frame, this is outside of React without overhead
+    useFrame((state, delta) => (mesh.current.rotation.x += 0.01))
+    // Return view, these are regular threejs elements expressed in JSX
+    return (
+      <mesh
+        {...props}
+        ref={mesh}
+        scale={active ? 1.5 : 1}
+        onClick={() => setActive(!active)}
+        onPointerOver={() => setHover(true)}
+        onPointerOut={() => setHover(false)}>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      </mesh>
+    )
+  }
+  render(
+    <Canvas camera={{ position: [0, 0, -5] }}>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+      <Box position={[0, 0, 0]} />
+    </Canvas>
+  )
+  `} 
+  providerProps={{ scope: { useState, Canvas, useRef, useFrame }, noInline: true }}
+  previewProps={liveCodePreviewProps} 
+/>
+
+---
+
+## References & more
+
+<PP>
+  <center>
+    <div>
+      <a href="https://en.wikipedia.org/wiki/WebGL">WebGL</a>
+    </div>
+    <div>
+      <a href="https://github.com/pmndrs/react-three-fiber">react-three-fiber (R3F)</a>
+    </div>
+    <br />
+    <div>More...</div>
+    <div>
+      <a href="https://github.com/pmndrs/react-three-fiber#ecosystem">R3F ecosystem</a>
+    </div>
+    <div>
+      <a href="https://lusion.co/">Lusion</a>
+    </div>
+  </center>
+</PP> 
+
+---
+
+## Questions
+
+<img style={{ height: '50%' }} src={Questions} />
