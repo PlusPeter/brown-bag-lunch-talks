@@ -1,0 +1,213 @@
+import { useState } from 'react'
+import { LiveCode } from 'mdx-deck-live-code'
+import {
+  C,
+  Definitions,
+  Def,
+  Term,
+  Code,
+  PaddedParagraph as PP
+} from '../styles'
+import { future } from '@mdx-deck/themes'
+
+export const theme = { ...future }
+
+export const liveCodePreviewProps = {
+  style: {
+    textAlign: 'left',
+    padding: '0.5em',
+    color: 'black'
+  }
+}
+
+## Tips and Tricks
+
+### for Time Travel
+
+#### via git
+
+<C>
+  git clone https://github.com/PlusPeter/brown-bag-lunch-talks.git
+  talks
+  <br />
+  git checkout time-travel
+</C>
+
+<Notes>
+  Please clone this repo, check out this branch, and push some code.
+  We'll go over some approaches for ameliorating insanity in a bit.
+</Notes>
+
+---
+
+## 1. Commit frequently
+
+<div>
+  <PP>
+    In order to go back in time, there has to be a destination to
+    travel to.
+    <br />
+    The more you commit, the greater your potential landing points.
+  </PP>
+  <C>git commit -m "human readable information" --no-verify</C>
+</div>
+
+<Notes>
+  high granularity (aka Walter style) vs. stable state
+  <br />
+  Having a large number of commits is sometimes great, but sometimes
+  it is a pain in the ass.
+  <br />
+  If I'm rebasing and I know there's going to be a conflict, rebasing
+  the branch to a single commit _before_ I rebase it against a common
+  ancestor is a great approach. We'll discuss this in more detail in a
+  few slides.
+  <br />
+  Git hooks allow you to mandate an acceptable state between commits
+  (but have an escape hatch in the form of no-verify)
+</Notes>
+
+---
+
+## 2. Increase redundancy
+
+<div>
+  <ol>
+    <li>Your local branch is a version of the truth.</li>
+    <li>Your local environment is a single copy of the shared truth.</li>
+    <li>You can have multiple local copies of the same repo.</li>
+    <li>You can have multiple remote copies.</li>
+  </ol>
+  <C>
+    git clone https://github.com/PlusPeter/brown-bag-lunch-talks.git talks2
+    <br />
+    git checkout time-travel
+    <br />
+    git checkout -b backup/time-travel
+  </C>
+</div>
+
+<Notes>
+  Push code frequently. Your computer could crash at any time.
+  Branch frequently. It costs you nothing.
+  <br />
+  Keeping multiple local copies allows you to keep multiple stable
+  states. It also allows for greater potential copies of a shared
+  history.
+  <br />
+  Having multiple remotes is sometimes a great way of having a
+  protected state.
+</Notes>
+
+---
+
+## 3. Know your tools
+
+1. `git` is not a silver bullet
+2. Fetch vs. Pull
+3. Rebase vs. Merge
+
+<Notes>
+  git is powerful and useful, but I've seen foolish usage ruin codebases quickly.
+</Notes>
+
+---
+
+## git
+
+1. .git/config
+2. CLI vs. GUI
+
+<C>
+  cat .git/config
+  <br />
+  git branch
+  <br />
+  git branch --all
+</C>
+
+<Notes>
+  To each their own within a given space.
+  <br />
+  But knowing how to do things in the command line gives you power which a GUI tool doesn't always afford.
+</Notes>
+
+---
+
+## Fetch vs. Pull
+
+<PP>
+Understanding the difference between these two things is
+essential.
+</PP>
+
+* Fetching is asking what is on the menu.
+* Pulling is like adoption.
+
+<Notes>
+  Here's a mixed metaphor!
+  <br />
+  Pulling is more dangerous (and costly) than fetching.
+  <br />
+  Having multiple copies helps protect you against (yourself) pulling
+  <br />
+  Having multiple repos helps protect you against others (and changes to shared history)
+</Notes>
+
+---
+
+## Rebasing > Merging
+
+<div>
+  <PP>
+    Use rebasing to keep a clean and sane actual / merged history.
+  </PP>
+  <C>
+    git checkout development
+    <br />
+    git pull
+    <br />
+    git checkout -<br />
+    git rebase -i development
+  </C>
+</div>
+
+<Notes>
+  Rebasing is more powerful than merging (but also more dangerous)
+  <br />
+  Having facility / knowledge of how to rebase in command line is much
+  more portable than familiarity with a specific GUI
+  <br />
+  If your computer crashed or you have to debug on a machine that
+  isn't yours, knowledge of how to rebase in the CLI is great
+  <br />
+  Remember that `--theirs` and `--ours` are flipped!
+</Notes>
+
+---
+
+## Tricks
+
+<div>
+  <PP>Having lots of destinations can be overwhelming.</PP>
+  <C>
+    git log --all -- coolfile.nice
+    <br />
+    git log --all -- '**/my_file.png'
+  </C>
+  <PP>Having lots of destinations can be lifesaving.</PP>
+  <C>
+    git push my-source2 _branch_name_
+    <br />
+    git remote add bak /local/path/to/other/repo
+    <br />
+    git checkout branch -- some.file.only
+  </C>
+</div>
+
+---
+
+## Questions + Live Session
+
+* Any questions?
+* Anything you want to go over in more detail?

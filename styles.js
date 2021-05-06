@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from '@emotion/styled'
 
 export const PaddedParagraph = styled.p`
@@ -28,6 +29,14 @@ export const Code = styled.div`
     white-space: pre-wrap;
   }
 `
+
+export const C = ({ children }) => (
+  <Code style={{ textAlign: 'center', fontSize: '1rem' }}>
+    <pre>
+      <code>{children}</code>
+    </pre>
+  </Code>
+)
 
 export const Definitions = styled.dl`
   padding: 0 1rem;
