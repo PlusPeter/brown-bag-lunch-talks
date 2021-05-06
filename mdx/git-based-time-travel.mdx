@@ -26,6 +26,18 @@ export const liveCodePreviewProps = {
 
 #### via git
 
+<C>
+  git clone https://github.com/PlusPeter/brown-bag-lunch-talks.git
+  talks
+  <br />
+  git checkout time-travel
+</C>
+
+<Notes>
+  Please clone this repo, check out this branch, and push some code.
+  We'll go over some approaches for ameliorating insanity in a bit.
+</Notes>
+
 ---
 
 ## 1. Commit frequently
@@ -66,10 +78,7 @@ export const liveCodePreviewProps = {
     <li>You can have multiple remote copies.</li>
   </ol>
   <C>
-    git clone https://github.com/PlusPeter/brown-bag-lunch-talks.git
-    talks
-    <br />
-    git checkout time-travel
+  git clone https://github.com/PlusPeter/brown-bag-lunch-talks.git talks2
   </C>
 </div>
 
@@ -82,27 +91,61 @@ export const liveCodePreviewProps = {
   <br />
   Having multiple remotes is sometimes a great way of having a
   protected state.
+</Notes>
+
+---
+
+## 3. Know your tools
+
+1. `git` is not a silver bullet
+2. Fetch vs. Pull
+3. Rebase vs. Merge
+
+<Notes>
+  git is powerful and useful, but I've seen foolish usage ruin codebases quickly.
+</Notes>
+
+---
+
+## git
+
+1. .git/config
+2. CLI vs. GUI
+
+<C>
+  cat .git/config
   <br />
-  Please clone this repo, check out this branch, and push some code.
-  We'll go over some approaches for ameliorating insanity in a bit.
+  git branch
+  <br />
+  git branch --all
+</C>
+
+<Notes>
+  To each their own within a given space.
+  <br />
+  But knowing how to do things in the command line gives you power which a GUI tool doesn't always afford.
 </Notes>
 
 ---
 
 ## Fetch vs. Pull
 
-<div>
-  <PP>
-    Understanding the difference between these two things is
-    essential. Fetching is asking what has changed. Pulling is taking
-    that history from remote to local.
-  </PP>
-</div>
+<PP>
+Understanding the difference between these two things is
+essential.
+</PP>
+
+* Fetching is asking what is on the menu.
+* Pulling is like adoption.
 
 <Notes>
-  Fetching is asking the adoption agency what babies they have on the
-  menu. Pulling is adopting a baby. Pulling is more dangerous (and
-  costly) than fetching.
+  Here's a mixed metaphor!
+  <br />
+  Pulling is more dangerous (and costly) than fetching.
+  <br />
+  Having multiple copies helps protect you against (yourself) pulling
+  <br />
+  Having multiple repos helps protect you against others (and changes to shared history)
 </Notes>
 
 ---
@@ -137,7 +180,7 @@ export const liveCodePreviewProps = {
 
 ---
 
-## Searching through history
+## Tricks
 
 <div>
   <PP>Having lots of destinations can be overwhelming.</PP>
@@ -145,13 +188,14 @@ export const liveCodePreviewProps = {
     git log --all -- coolfile.nice
     <br />
     git log --all -- '**/my_file.png
-    <br />
+  </C>
+  <PP>Having lots of destinations can be lifesaving.</PP>
+  <C>
     git push my-source2 _branch_name_
     <br />
     git remote add bak /local/path/to/other/repo
+    <br />
+    git checkout branch -- some.file.only
   </C>
 </div>
 
----
-
-3. Copy references
