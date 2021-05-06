@@ -73,17 +73,23 @@ export const liveCodePreviewProps = {
 
 <div>
   <ol>
-    <li>Your local environment is a single copy of the truth.</li>
+    <li>Your local branch is a version of the truth.</li>
+    <li>Your local environment is a single copy of the shared truth.</li>
     <li>You can have multiple local copies of the same repo.</li>
     <li>You can have multiple remote copies.</li>
   </ol>
   <C>
-  git clone https://github.com/PlusPeter/brown-bag-lunch-talks.git talks2
+    git clone https://github.com/PlusPeter/brown-bag-lunch-talks.git talks2
+    <br />
+    git checkout time-travel
+    <br />
+    git checkout -b backup/time-travel
   </C>
 </div>
 
 <Notes>
   Push code frequently. Your computer could crash at any time.
+  Branch frequently. It costs you nothing.
   <br />
   Keeping multiple local copies allows you to keep multiple stable
   states. It also allows for greater potential copies of a shared
@@ -187,7 +193,7 @@ essential.
   <C>
     git log --all -- coolfile.nice
     <br />
-    git log --all -- '**/my_file.png
+    git log --all -- '**/my_file.png'
   </C>
   <PP>Having lots of destinations can be lifesaving.</PP>
   <C>
@@ -199,3 +205,9 @@ essential.
   </C>
 </div>
 
+---
+
+## Questions + Live Session
+
+* Any questions?
+* Anything you want to go over in more detail?
